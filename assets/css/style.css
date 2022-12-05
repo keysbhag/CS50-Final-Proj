@@ -1,0 +1,11 @@
+textarea {
+  resize: none;
+}
+
+.nav-bg{
+    background-color:darkturquoise;
+}
+
+.input-form{
+    flex-basis: 50%;
+}
