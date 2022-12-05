@@ -9,3 +9,11 @@ textarea {
 .input-form{
     flex-basis: 50%;
 }
+
+.todo{
+    width: 40%;
+}
+
+.del-btn{
+    min-width: 10%;
+}

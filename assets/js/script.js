@@ -35,10 +35,17 @@ function listTODO() {
   todoString = " ";
   for (let i = 0; i < todoArray.length; i++) {
     todoString = todoString.concat(
-        `<div>
-            <h2>${todoArray[i].title}</h2>
-            <p>${todoArray[i].content}</p>
-        </div>`
+        `
+        <div class="card todo m-2">
+            <div class="card-body d-flex flex-column">
+                <h2 class="card-title">${todoArray[i].title}</h2>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">${todoArray[i].content}</p>
+                    <button class="del-btn btn btn-danger"> Delete</button>
+                </div>
+            </div>
+        </div>
+        `
     );
 
     }
