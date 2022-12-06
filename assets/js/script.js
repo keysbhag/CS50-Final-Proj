@@ -7,11 +7,10 @@ let todoList;
 todoTitle = document.querySelector("#todo-title");
 todoContent = document.querySelector("#todo-content");
 saveTODOBtn = document.querySelector("#save-todo");
-deleteTODOBtn = document.querySelector("#delete-todo");
 todoList = document.querySelector("#add-TODO");
 
 let todoArray = [];
-let todoString = '';
+let todoString = "";
 
 init();
 
@@ -29,31 +28,49 @@ function addTODO() {
 
   saveTODO();
   listTODO();
+  [...document.querySelectorAll(".del-btn")].forEach((el) =>
+    el.addEventListener("click", deleteTODO)
+  );
 }
 
 function listTODO() {
   todoString = " ";
-  for (let i = 0; i < todoArray.length; i++) {
+  for (let i = todoArray.length - 1; i >= 0; i--) {
     todoString = todoString.concat(
-        `
+      `
         <div class="card todo m-2">
-            <div class="card-body d-flex flex-column">
-                <h2 class="card-title">${todoArray[i].title}</h2>
+            <div class="card-body d-flex flex-column pt-2 pb-2">
                 <div class="d-flex justify-content-between">
+                    <h2 class="card-title">${todoArray[i].title}</h2>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                </div>
+                <div class="d-flex justify-content-between pt-2 pb-2">
                     <p class="card-text">${todoArray[i].content}</p>
-                    <button class="del-btn btn btn-danger"> Delete</button>
+                    <button id="${i}" class="del-btn btn btn-danger"> Delete</button>
                 </div>
             </div>
         </div>
         `
     );
-
-    }
-    todoList.innerHTML = todoString;
+  }
+  todoList.innerHTML = todoString;
 }
 
 function saveTODO() {
   localStorage.setItem("todoArray", JSON.stringify(todoArray));
+}
+
+function deleteTODO(event) {
+  console.log(todoArray);
+  let delID = event.target.id;
+  console.log(delID);
+  todoArray.splice(delID, 1);
+  console.log(todoArray);
+  saveTODO();
+  listTODO();
+  [...document.querySelectorAll(".del-btn")].forEach((el) =>
+    el.addEventListener("click", deleteTODO)
+  );
 }
 
 function init() {
@@ -67,3 +84,7 @@ function init() {
 }
 
 saveTODOBtn.addEventListener("click", addTODO);
+
+[...document.querySelectorAll(".del-btn")].forEach((el) =>
+  el.addEventListener("click", deleteTODO)
+);
